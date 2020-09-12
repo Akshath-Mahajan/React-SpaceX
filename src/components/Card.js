@@ -4,8 +4,8 @@ export class Card extends Component {
     render() {
         return (
             <div className="col-12 col-md-6 col-xl-4 px-0">
-                <Link to={link(this.props.flight.flight_number)}>
-                <div className="card h-100">
+                <Link to={link(this.props.flight.flight_number)} style={{textDecoration:'none', color:'#333'}}>
+                <div className="card h-100 border-primary">
                     <div className="card-body">
                         <h4 className="card-title">{this.props.flight.mission_name}<br/>
                             <small>{date(this.props.flight.launch_date_unix)}, {this.props.flight.launch_site.site_name}</small>

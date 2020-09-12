@@ -27,3 +27,4 @@ const date = (unix_stamp) => {
     return dateObject.toLocaleDateString('en-GB', { hour12: true })
 };
 export default Card
+export {date};

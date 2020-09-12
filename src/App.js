@@ -3,6 +3,7 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import axios from 'axios'
 import Header from './components/Header'
 import Card from './components/Card'
+import Launch from './components/Launch'
 export class App extends Component {
     state  = {data:[], ascending:true}
     componentDidMount(){
@@ -28,7 +29,6 @@ export class App extends Component {
                 <div className="container-fluid">
                     <Header />
                     <Route exact path="/">
-                        
                         <div className="row px-3">
                             <div className="col-12">
                                 <button type="button" className="btn btn-block btn-outline-success sort-btn" onClick={this.sortData}>
@@ -38,7 +38,7 @@ export class App extends Component {
                             {this.state.data.map((flight) => <Card key={flight.flight_number} flight={flight} />)}
                         </div>
                     </Route>
-                    
+                    <Route exact path="/:flight_number" component={Launch}></Route>
                 </div>
             </BrowserRouter>
         )

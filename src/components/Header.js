@@ -5,6 +5,7 @@ export class Header extends Component {
         return (
             <div className="text-center py-2" style={headerCustomStyle}>
                 <h1>Welcome to the SpaceX App</h1>
+                <h2>Here is a list of all flights:</h2>
             </div>
         )
     }

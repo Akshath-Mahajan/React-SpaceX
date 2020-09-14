@@ -10,6 +10,9 @@ export class Card extends Component {
                         <h4 className="card-title">{this.props.flight.mission_name}<br/>
                             <small>{date(this.props.flight.launch_date_unix)}, {this.props.flight.launch_site.site_name}</small>
                         </h4>
+                        <div className="text-center mb-4">
+                            <img src={this.props.flight.links.mission_patch_small} className="img-fluid" />
+                        </div>
                         <p className="card-text">
                             {this.props.flight.details?this.props.flight.details:'No details available'}
                         </p>

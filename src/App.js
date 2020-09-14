@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import {BrowserRouter, Route} from 'react-router-dom'
 import axios from 'axios'
 import Header from './components/Header'
-import Card from './components/Card'
 import Launch from './components/Launch'
+import CardContainer from './components/CardContainer'
+import FilterByDate from './components/FilterByDate'
 export class App extends Component {
     state  = {data:[], ascending:true}
     componentDidMount(){
@@ -23,20 +24,20 @@ export class App extends Component {
         )
         this.setState((prevState) => {return {data:temp, ascending:!prevState.ascending}})
     }
+    filterDates = (e, start, end) => {
+        e.preventDefault()
+        axios.get(`https://api.spacexdata.com/v3/launches?start=${start}&end=${end}&limit=12`).then(
+            res => {this.setState({data:res.data})}
+        )
+    }
     render() {
         return (
             <BrowserRouter>
                 <div className="container-fluid">
                     <Header />
                     <Route exact path="/">
-                        <div className="row px-3">
-                            <div className="col-12">
-                                <button type="button" className="btn btn-block btn-outline-success sort-btn" onClick={this.sortData}>
-                                    Change order to - {this.state.ascending?'Descending':'Ascending'}
-                                </button>
-                            </div>
-                            {this.state.data.map((flight) => <Card key={flight.flight_number} flight={flight} />)}
-                        </div>
+                        <FilterByDate filterDates={this.filterDates}/>
+                        <CardContainer data={this.state.data} ascending={this.state.ascending} sortData={this.sortData}/>
                     </Route>
                     <Route exact path="/:flight_number" component={Launch}></Route>
                 </div>
